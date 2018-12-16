@@ -4,5 +4,6 @@ RUN echo "deb http://downloads.3cx.com/downloads/debian stretch main" | tee /etc
 RUN apt-get -y update
 RUN apt-get -y install libcurl3 gnupg2
 RUN apt-get -y install net-tools
+RUN apt-get install $(apt-cache depends 3cxpbx | grep Depends | sed "s/.*ends:\ //" | tr '\n' ' ')
 RUN apt-get -y install 3cxpbx
 CMD "/lib/systemd/systemd"
